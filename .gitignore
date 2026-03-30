@@ -1,0 +1,7 @@
+.idea
+/data
+/tiles
+/external/
+/node_modules/
+/build/
+/dist/
