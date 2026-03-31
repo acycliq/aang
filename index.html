@@ -64,6 +64,38 @@
             </div>
         </div>
             <div class="controls-content">
+            <!-- Cell Classes Section (Collapsible) -->
+            <div class="control-section">
+                <h3 class="section-label collapsible-header" id="cellClassesHeader">
+                    <span class="collapse-icon">▼</span> Cell Classes
+                </h3>
+                <div class="section-content" id="cellClassesContent">
+                    <div class="cell-class-controls">
+                        <button class="show-all-btn" id="showAllCellClassesBtn">Show All</button>
+                        <button class="hide-all-btn" id="hideAllCellClassesBtn">Hide All</button>
+                    </div>
+                    <div class="cell-class-filter-container" id="cellClassFilterContainer">
+                        <input type="text" class="filter-input" id="cellClassFilter" placeholder="Filter classes…" autocomplete="off" spellcheck="false">
+                    </div>
+                    <div class="cell-class-list" id="cellClassesList">
+                        <div class="loading-message">Loading cell classes...</div>
+                    </div>
+                    <div class="legend-resize-handle" id="cellClassesResizeHandle" title="Drag to resize"></div>
+                </div>
+            </div>
+
+            <!-- Cell Charts Section (Collapsible) -->
+            <div class="control-section">
+                <h3 class="section-label collapsible-header" id="cellChartsHeader">
+                    <span class="collapse-icon">▼</span> Cell Charts
+                </h3>
+                <div class="section-content" id="cellChartsContent">
+                    <button id="classesByZBtn" title="Cell Class Distribution by Z-Plane">Classes by Z</button>
+                    <button id="classPercentageBtn" title="Overall Cell Class Distribution">Class Distribution</button>
+                    <button id="expressionHistogramBtn" title="Gene count distribution per cell class (pciSeq output)">Class Gene Counts</button>
+                </div>
+            </div>
+
             <!-- Genes Section (Collapsible) -->
             <div class="control-section">
                 <h3 class="section-label collapsible-header" id="genesHeader">
@@ -71,23 +103,19 @@
                 </h3>
                 <div class="section-content" id="genesContent">
                     <div class="cell-class-controls">
-                        <div class="toggle-all-group" id="genesToggleAllGroup">
-                            <label for="genesToggleAll" class="toggle-all-label">Show All</label>
-                            <input type="checkbox" id="genesToggleAll" class="toggle-all-checkbox" aria-checked="false">
-                        </div>
-                        <button class="hide-all-btn" id="importGeneColorsBtn" title="Import gene colours and glyphs (Ctrl+click to replace all)">Import colours</button>
+                        <button class="show-all-btn" id="showAllGenesBtn">Show All</button>
+                        <button class="hide-all-btn" id="hideAllGenesBtn">Hide All</button>
                     </div>
-                    <input type="file" id="geneColorFileInput" accept=".json" style="display:none" />
                     <div class="cell-class-filter-container" id="geneFilterContainer">
                         <input type="text" class="filter-input" id="geneFilter" placeholder="Filter genes…" autocomplete="off" spellcheck="false">
                     </div>
                     <div class="cell-class-list" id="genesList">
                         <div class="loading-message">Loading genes...</div>
                     </div>
-                    <div id="geneColorFileStatus" class="file-status" aria-live="polite"></div>
                     <div class="legend-resize-handle" id="genesResizeHandle" title="Drag to resize"></div>
                 </div>
             </div>
+
             <!-- Gene Controls Section (Collapsible) -->
             <div class="control-section">
                 <h3 class="section-label collapsible-header" id="geneControlsHeader">
@@ -110,52 +138,11 @@
                         <input type="range" id="intensityFilterSlider" min="0" max="1.0" step="0.01" value="0">
                         <span id="intensityFilterValue">0.00</span>
                     </div>
-                    <div class="control-item">
+                    <label class="toggle-switch">
+                        <span class="label-text">Uniform Size</span>
                         <input type="checkbox" id="uniformSizeToggle">
-                        <label for="uniformSizeToggle" title="When enabled, all markers use the same size regardless of plane distance">Uniform Size</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cell Classes Section (Collapsible) -->
-            <div class="control-section">
-                <h3 class="section-label collapsible-header" id="cellClassesHeader">
-                    <span class="collapse-icon">▼</span> Cell Classes
-                </h3>
-                <div class="section-content" id="cellClassesContent">
-                    <div class="cell-class-controls">
-                        <div class="toggle-all-group" id="classesToggleAllGroup">
-                            <label for="classesToggleAll" class="toggle-all-label">Show All</label>
-                            <input type="checkbox" id="classesToggleAll" class="toggle-all-checkbox" aria-checked="false">
-                        </div>
-                        <button class="hide-all-btn" id="importClassColorsBtn" title="Import class colours (Ctrl+click to replace all)">Import colours</button>
-                    </div>
-                    <!-- Hidden file input for importing class colour schemes -->
-                    <input type="file" id="classColorFileInput" accept=".json" style="display:none" />
-                    <!-- Sticky filter container (pciSeq_3d pattern) -->
-                    <div class="cell-class-filter-container" id="cellClassFilterContainer">
-                        <input type="text" class="filter-input" id="cellClassFilter" placeholder="Filter classes…" autocomplete="off" spellcheck="false">
-                    </div>
-                    <div class="cell-class-list" id="cellClassesList">
-                        <!-- Cell classes will be populated here, ranked by count -->
-                        <div class="loading-message">Loading cell classes...</div>
-                    </div>
-                    <!-- Import status message placed below the list so it doesn't push the filter -->
-                    <div id="classColorFileStatus" class="file-status" aria-live="polite"></div>
-                    <!-- Drag handle to resize list height (pciSeq_3d pattern) -->
-                    <div class="legend-resize-handle" id="cellClassesResizeHandle" title="Drag to resize"></div>
-                </div>
-            </div>
-
-            <!-- Cell Charts Section (Collapsible) -->
-            <div class="control-section">
-                <h3 class="section-label collapsible-header" id="cellChartsHeader">
-                    <span class="collapse-icon">▼</span> Cell Charts
-                </h3>
-                <div class="section-content" id="cellChartsContent">
-                    <button id="cellClassViewerBtn" onclick="openCellClassViewer()" title="Open Christina">Christina</button>
-                    <button id="classesByZBtn" title="Cell Class Distribution by Z-Plane">Classes by Z</button>
-                    <button id="classPercentageBtn" title="Overall Cell Class Distribution">Class Distribution</button>
+                        <span class="switch-slider"></span>
+                    </label>
                 </div>
             </div>
 
@@ -180,23 +167,26 @@
                     <span class="collapse-icon">▼</span> Layers
                 </h3>
                 <div class="section-content" id="layersContent">
-                    <div class="control-item">
+                    <label class="toggle-switch">
+                        <span class="label-text">Dapi</span>
                         <input type="checkbox" id="showTiles" checked>
-                        <label for="showTiles">Dapi</label>
-                    </div>
-                    <div class="control-item">
+                        <span class="switch-slider"></span>
+                    </label>
+                    <label class="toggle-switch">
+                        <span class="label-text">Cells</span>
                         <input type="checkbox" id="showPolygons" checked>
-                        <label for="showPolygons">Cells</label>
-                    </div>
+                        <span class="switch-slider"></span>
+                    </label>
                     <div class="control-item polygon-opacity-item">
                         <label for="polygonOpacitySlider">Opacity</label>
                         <input type="range" id="polygonOpacitySlider" min="0.0" max="1.0" step="0.1">
                         <span id="polygonOpacityValue">0.4</span>
                     </div>
-                    <div class="control-item">
+                    <label class="toggle-switch">
+                        <span class="label-text">All Planes</span>
                         <input type="checkbox" id="zProjectionToggle">
-                        <label for="zProjectionToggle">All Planes</label>
-                    </div>
+                        <span class="switch-slider"></span>
+                    </label>
                     <div id="zProjectionControls" style="display: none; margin-left: 15px;">
                         <div class="control-item" style="margin-top: 5px;">
                             <label for="zProjectionOpacity" style="font-size: 11px;">Overlay:</label>
@@ -205,16 +195,23 @@
                             <span id="zProjectionOpacityValue" style="font-size: 10px;">30%</span>
                         </div>
                     </div>
-                    <div class="control-item">
+                    <label class="toggle-switch">
+                        <span class="label-text">Cell Projection</span>
                         <input type="checkbox" id="cellProjectionToggle">
-                        <label for="cellProjectionToggle">Cell Projection</label>
-                    </div>
+                        <span class="switch-slider"></span>
+                    </label>
                     <div id="cellProjectionControls" style="display: none; margin-left: 15px;">
                         <div class="control-item" style="margin-top: 5px;">
                             <label for="geneCountSlider" style="font-size: 11px;">Min Genes:</label>
                             <input type="range" id="geneCountSlider" min="0" max="100" step="1" value="0"
                                    style="width: 80px; margin: 0 5px;">
                             <span id="geneCountValue" style="font-size: 10px;">0</span>
+                        </div>
+                        <div class="control-item" style="margin-top: 5px;">
+                            <label for="geneCountMaxSlider" style="font-size: 11px;">Max Genes:</label>
+                            <input type="range" id="geneCountMaxSlider" min="0" max="100" step="1" value="100"
+                                   style="width: 80px; margin: 0 5px;">
+                            <span id="geneCountMaxValue" style="font-size: 10px;">100</span>
                         </div>
                     </div>
                 </div>
@@ -226,10 +223,11 @@
                     <span class="collapse-icon">▼</span> Tools
                 </h3>
                 <div class="section-content" id="toolsContent">
-                    <button id="selectionToolBtn" class="accent-btn" title="Rectangular Selection">
-                        <img src="selection_tool.png" alt="Selection">
-                        <span>Selection</span>
-                    </button>
+                    <label class="toggle-switch">
+                        <span class="label-text">Selection tool</span>
+                        <input type="checkbox" id="selectionToolBtn">
+                        <span class="switch-slider"></span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -369,28 +367,38 @@
     </div>
 
     <!-- Cell Info Panel (Bottom Right) -->
-    <div id="cellInfoPanel" class="cell-info-panel" style="display: none;">
+    <div id="cellInfoPanel" class="cell-info-panel">
         <div class="cell-info-header">
             <span id="cellInfoTitle">Cell Information</span>
-            <button id="cellInfoClose" class="widget-close-btn">×</button>
+            <button id="cellInfoClose" class="widget-close-btn">&times;</button>
         </div>
         <div class="cell-info-content">
             <div class="cell-info-layout">
-                <!-- Gene Counts Table (left) -->
-                <div class="cell-info-left">
+                <!-- LEFT: Gene Counts Table -->
+                <div class="cell-info-column cell-info-genes">
                     <table id="geneCountsTable" class="display compact"></table>
                 </div>
-                <!-- Donut Chart (right) -->
-                <div class="cell-info-right">
-                    <div class="cell-info-chart-container">
-                        <div id="cellInfoChart">
-                            <svg width="280" height="160"></svg>
-                        </div>
+                <!-- CENTER: Donut Chart (clean, no labels) -->
+                <div class="cell-info-column cell-info-donut">
+                    <div id="cellInfoChart">
+                        <svg width="180" height="180"></svg>
                     </div>
+                </div>
+                <!-- RIGHT: Class Legend (scrollable) -->
+                <div class="cell-info-column cell-info-legend">
+                    <div id="classLegend"></div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Cell Lookup (command palette) -->
+    <input type="text"
+           id="cellSearchInput"
+           class="cell-search-bar"
+           placeholder="Go to cell..."
+           autocomplete="off"
+           style="display:none;" />
 
     <script>
         (function() {

@@ -14,7 +14,7 @@ function config() {
         voxelSize: [0.28, 0.28, 0.7],
 
         // Background image: use {plane}, {z}, {y}, {x} as placeholders
-        backgroundTiles: "https://storage.googleapis.com/christina_silver_hc/tiles_hc/tiles_{plane}/{z}/{y}/{x}.jpg",
+        backgroundTiles: "https://storage.googleapis.com/aang_data/tiles/plane_{plane}/{z}/{y}/{x}.jpg",
 
         // Arrow manifests
         arrowSpotsManifest: "https://storage.googleapis.com/aang_data/arrow/arrow_spots/manifest.json",
